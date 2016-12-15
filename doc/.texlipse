@@ -1,0 +1,14 @@
+#TeXlipse project settings
+#Thu Dec 15 17:16:13 CET 2016
+markTmpDer=true
+builderNum=2
+outputDir=
+makeIndSty=
+bibrefDir=
+outputFormat=pdf
+tempDir=tmp
+mainTexFile=main.tex
+outputFile=ESDMiT_Adasiewicz_Maciejewski.pdf
+langSpell=pl
+markDer=true
+srcDir=src/
