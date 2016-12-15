@@ -1,4 +1,6 @@
 \section{Empirical Mode Decomposition}
+
+\subsection{Dekompozycja sygnału EKG}
 \indent
 
 Metoda EMD polega na rozkładzie badanego sygnału na elementy składowe.
@@ -86,7 +88,35 @@ przedstawiony został na rysunku~\ref{fig:sampleimfs}.
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=\textwidth]{../img/sampleimfs.eps}
-    \caption{Sygnał bazowy $x[n]$, trzy pierwsze składowe IMFs oraz reszta
+    \caption{Sygnał bazowy $x[n]$, trzy pierwsze składowe IMF-y oraz reszta
     $r_3$}
     \label{fig:sampleimfs}
 \end{figure}
+
+\newpage
+
+\subsection{Odtwarzanie sygnału EKG}
+\indent
+
+W odtworzenia niezaszumionego sygnału EKG należy zsumować IMF-y niosące ze sobą
+istotne informacje. Wybór odpowiednich IMF-ów jest istotnym czynnikiem
+wpływającym na jakość filtracji. Odrzucenie zbyt wielu składowych spowoduje duże
+zniekształcenie badanego sygnału. Odrzucenie zbyt małej liczby składowych
+niedostatecznie odfiltruje szumy. Zazwyczaj początkowe składowe IMF zawierają
+szum, im wyższy rząd składowej, tym więcej istotnej informacji niesie.
+
+Na rysunku \ref{rys:example_ekg}, przedstawiono przykładowy sygnał EKG
+odfiltrowany metodą EMD dla różnej liczby odrzuconych początkowych składowych
+IMF.
+
+\begin{figure}[!htb]
+    \begin{center}
+        \includegraphics[width=14cm,trim=3cm 8cm 3cm 8cm,clip]
+        {../img/ka_example.pdf}
+    \end{center}
+    \caption{Przykładowy przebieg EKG, na tle odfiltrowanych sygnałów o różnej
+    liczbie odrzuconych składowych IMF}
+    \label{rys:example_ekg}
+\end{figure}
+
+
