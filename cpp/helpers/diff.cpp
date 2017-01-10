@@ -1,5 +1,7 @@
 #include "diff.h"
 
+using namespace helpers;
+
 Eigen::VectorXd diff(Eigen::VectorXd const & vVector)
 {
     Eigen::VectorXd aVec(vVector.size() - 1);

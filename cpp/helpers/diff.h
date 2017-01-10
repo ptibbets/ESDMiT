@@ -1,5 +1,8 @@
 #pragma once
 
-#include <eigen3/Eigen/Eigen>
+#include <Eigen/Eigen>
 
-Eigen::VectorXd diff(Eigen::VectorXd const & vVector);
+namespace helpers
+{
+    Eigen::VectorXd diff(Eigen::VectorXd const & vVector);
+}

@@ -1,27 +1,19 @@
 #include <iostream>
-#include <eigen3/Eigen/Dense>
+#include "DataReader.h"
 
-#include "helpers/diff.h"
-
-using Eigen::VectorXd;
-
-int main()
+int main(int argc, char **argv)
 {
-    VectorXd v;
-    v.resize(2);
-    v[0] = 2;
-    v[1] = 5;
+    std::string aPath(argv[1]);
+    std::string aRecord(argv[2]);
 
-    std::cout << v << std::endl;
-
-    auto a = diff(v);
-
-    std::cout << a << std::endl;
-
-//  MatrixXd m(2,2);
-//  m(0,0) = 3;
-//  m(1,0) = 2.5;
-//  m(0,1) = -1;
-//  m(1,1) = m(1,0) + m(0,1);
-//  std::cout << m << std::endl;
+    try
+    {
+        DataReader aReader(aPath, aRecord);
+        auto aSig = aReader.getData(0);
+    }
+    catch (std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+        return 1;
+    }
 }
