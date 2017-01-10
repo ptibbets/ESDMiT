@@ -1,5 +1,6 @@
 #include <iostream>
 #include "DataReader.h"
+#include "DataWriter.h"
 
 int main(int argc, char **argv)
 {
@@ -9,7 +10,8 @@ int main(int argc, char **argv)
     try
     {
         DataReader aReader(aPath, aRecord);
-        auto aSig = aReader.getData(0);
+        auto aSignals = aReader.getData();
+        writeData("out.txt", aSignals);
     }
     catch (std::exception &e)
     {

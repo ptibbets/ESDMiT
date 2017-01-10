@@ -14,6 +14,6 @@ class DataReader
     Eigen::VectorXd getSignal(std::size_t vSignalNumber);
 
 public:
-    DataReader(std::string vPath, std::string vRecordName) throw(std::runtime_error);
-    Eigen::VectorXd & getData(std::size_t vSignalNumber);
+    DataReader(std::string vPath, std::string vRecordName);
+    std::vector<Eigen::VectorXd> & getData();
 };

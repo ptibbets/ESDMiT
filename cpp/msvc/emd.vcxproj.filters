@@ -30,6 +30,9 @@
     <ClCompile Include="..\helpers\diff.cpp">
       <Filter>Source Files\helpers</Filter>
     </ClCompile>
+    <ClCompile Include="..\DataWriter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\DataReader.h">
@@ -43,6 +46,9 @@
     </ClInclude>
     <ClInclude Include="..\helpers\Vector.h">
       <Filter>Source Files\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\DataWriter.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

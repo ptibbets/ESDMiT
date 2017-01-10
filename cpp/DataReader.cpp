@@ -17,7 +17,7 @@ Eigen::VectorXd DataReader::getSignal(std::size_t vSignalNumber)
     return aVector;
 }
 
-DataReader::DataReader(std::string vPath, std::string vRecordName) throw(std::runtime_error)
+DataReader::DataReader(std::string vPath, std::string vRecordName)
 {
     mDataVectors.clear();
     setwfdb(const_cast<char*>(vPath.c_str()));
@@ -31,7 +31,7 @@ DataReader::DataReader(std::string vPath, std::string vRecordName) throw(std::ru
     }
 }
 
-Eigen::VectorXd & DataReader::getData(std::size_t vSignalNumber)
+std::vector<Eigen::VectorXd> & DataReader::getData()
 {
-    return mDataVectors[vSignalNumber];
+    return mDataVectors;
 }

@@ -20,9 +20,10 @@ namespace helpers
             return mVectorLength;
         }
 
-        Vector & pushBack(double vValue)
+        template<typename tValue>
+        Vector & pushBack(tValue vValue)
         {
-            if(mEigenVector.size() > mVectorLength)
+            if((unsigned)mEigenVector.size() > mVectorLength)
             {
                 mEigenVector[mVectorLength++] = vValue;
             }

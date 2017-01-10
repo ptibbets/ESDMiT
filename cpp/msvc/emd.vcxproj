@@ -88,12 +88,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\DataReader.cpp" />
+    <ClCompile Include="..\DataWriter.cpp" />
     <ClCompile Include="..\emd.cpp" />
     <ClCompile Include="..\helpers\diff.cpp" />
     <ClCompile Include="..\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\DataReader.h" />
+    <ClInclude Include="..\DataWriter.h" />
     <ClInclude Include="..\emd.h" />
     <ClInclude Include="..\helpers\diff.h" />
     <ClInclude Include="..\helpers\Vector.h" />
