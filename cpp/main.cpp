@@ -9,7 +9,7 @@ int main(int argc, char **argv)
 
     try
     {
-        DataReader aReader(aPath, aRecord);
+        DataReader aReader(aPath, aRecord, 250);
         auto aSignals = aReader.getData();
         writeData("out.txt", aSignals);
     }

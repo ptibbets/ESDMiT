@@ -13,7 +13,7 @@ class DataReader
 
     std::size_t mSignalCount = sizeof(mSignalInfo) / sizeof(WFDB_Siginfo);
 
-    Eigen::VectorXd getSignal(std::size_t vSignalNumber, int vDataLength);
+    void getSignals(int vDataLength);
 
 public:
     DataReader(std::string vPath, std::string vRecordName, int vDataLength = -1);
