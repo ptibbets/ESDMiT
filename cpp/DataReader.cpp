@@ -25,7 +25,7 @@ DataReader::DataReader(std::string vPath, std::string vRecordName) throw(std::ru
     {
         throw std::runtime_error("Cannot open record");
     }
-    for(auto aIndex = 0; aIndex < sizeof(mSignalInfo); aIndex++)
+    for(auto aIndex = 0; aIndex < sizeof(mSignalInfo) / sizeof(WFDB_Siginfo); aIndex++)
     {
         mDataVectors.push_back(getSignal(aIndex));
     }
