@@ -17,5 +17,5 @@ class DataReader
 
 public:
     DataReader(std::string vPath, std::string vRecordName, int vDataLength = -1);
-    Eigen::VectorXd & getData(std::size_t vSignalNumber);
+    std::vector<Eigen::VectorXd> & getData();
 };

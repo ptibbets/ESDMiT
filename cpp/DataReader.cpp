@@ -31,7 +31,7 @@ DataReader::DataReader(std::string vPath, std::string vRecordName, int vDataLeng
     }
 }
 
-Eigen::VectorXd & DataReader::getData(std::size_t vSignalNumber)
+std::vector<Eigen::VectorXd> & DataReader::getData()
 {
-    return mDataVectors[vSignalNumber];
+    return mDataVectors;
 }
