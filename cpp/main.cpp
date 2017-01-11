@@ -2,6 +2,7 @@
 #include "DataReader.h"
 #include "DataWriter.h"
 #include "emd.h"
+#include "filter.h"
 
 int main(int argc, char **argv)
 {
@@ -13,7 +14,10 @@ int main(int argc, char **argv)
         DataReader aReader(aPath, aRecord, std::stoi(std::string(argv[3])));
         auto aSignals = aReader.getData();
         auto aIMFs = emd(aSignals[0]);
-        writeData("out.txt", aSignals);
+        auto aResult = filter(aIMFs, 1);
+        std::vector<decltype(aResult)> aResultVec;
+        aResultVec.push_back(aResult);
+        writeData("out.txt", aResultVec);
     }
     catch (std::exception &e)
     {
