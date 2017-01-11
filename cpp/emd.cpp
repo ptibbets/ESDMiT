@@ -1,13 +1,15 @@
 #include "emd.h"
 #include "helpers/diff.h"
-#include "helpers/Vector.h"
+#include "helpers/Spline.h"
 
-void findMinMax(Eigen::VectorXd &vDiff, Eigen::VectorXi &vMins, Eigen::VectorXi &vMaxes)
+#include <iostream>
+
+void findMinMax(Eigen::VectorXd &vDiff, Eigen::VectorXd &vMins, Eigen::VectorXd &vMaxes)
 {
     std::size_t aMinLength = 0, aMaxLength = 0;
     vMaxes[aMaxLength++] = 0;
     vMins[aMinLength++] = 0;
-    for(auto aIndex = 1; aIndex < vDiff.size() - 2; aIndex++)
+    for(auto aIndex = 1; aIndex < vDiff.rows() - 2; aIndex++)
     {
         if((vDiff[aIndex] == 0) && (vDiff[aIndex - 1] > 0) && (vDiff[aIndex + 1] < 0))
         {
@@ -32,16 +34,32 @@ void findMinMax(Eigen::VectorXd &vDiff, Eigen::VectorXi &vMins, Eigen::VectorXi 
         throw std::exception();
     }
 
-    if(vMaxes[aMaxLength] != vDiff.size() - 1)
+    if(vMaxes[aMaxLength] != vDiff.rows() - 1)
     {
-        vMaxes[aMaxLength++] = vDiff.size();
+        vMaxes[aMaxLength++] = vDiff.rows();
     }
-    if(vMins[aMinLength] != vDiff.size() - 1)
+    if(vMins[aMinLength] != vDiff.rows() - 1)
     {
-        vMins[aMinLength++] = vDiff.size();
+        vMins[aMinLength++] = vDiff.rows();
     }
     vMaxes = vMaxes.block(0, 0, aMaxLength, 1);
     vMins = vMins.block(0, 0, aMinLength, 1);
+}
+
+Eigen::VectorXd getEnv(Eigen::VectorXd &vX, Eigen::VectorXd &vAllVals)
+{
+    Eigen::VectorXd aYY(vAllVals.rows());
+    Eigen::VectorXd aY(vX.rows());
+    for(auto aIndex = 0; aIndex < aY.rows(); aIndex++)
+    {
+        aY[aIndex] = vAllVals[vX[aIndex]];
+    }
+    helpers::Spline aSpline(vX, aY);
+    for(auto aIndex = 0; aIndex < aYY.rows(); aIndex++)
+    {
+        aYY[aIndex] = aSpline(aIndex);
+    }
+    return aYY;
 }
 
 std::vector<Eigen::VectorXd> emd(Eigen::VectorXd const &vSamples)
@@ -54,20 +72,28 @@ std::vector<Eigen::VectorXd> emd(Eigen::VectorXd const &vSamples)
         auto aH = aSamples;
         double aSD = 1;
 
-        while(aSD > 0.3)
+        try
         {
-            auto aDiff = helpers::diff(aH);
-            Eigen::VectorXi aMaxes(vSamples.size());
-            Eigen::VectorXi aMins(vSamples.size());
-            try
+            while(aSD > 0.3)
             {
+                auto aDiff = helpers::diff(aH);
+                Eigen::VectorXd aMaxes(vSamples.rows());
+                Eigen::VectorXd aMins(vSamples.rows());
                 findMinMax(aDiff, aMins, aMaxes);
-            }
-            catch (std::exception &e)
-            {
-                break;
+                auto aMaxEnv = getEnv(aMaxes, aH);
+                auto aMinEnv = getEnv(aMins, aH);
+                auto aMean = (aMaxEnv + aMinEnv) / 2;
+                auto aPrevH = aH;
+                aH -= aMean;
+                aSD = ((aPrevH - aH).cwiseProduct(aPrevH - aH)).cwiseQuotient(aPrevH.cwiseProduct(aPrevH) + Eigen::VectorXd::Ones(aH.rows()) * 0.001).sum();
             }
         }
+        catch(std::exception &e)
+        {
+            break;
+        }
+        aIMF.push_back(aH);
+        aSamples -= aH;
     }
 
     return aIMF;

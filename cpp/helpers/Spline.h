@@ -7,9 +7,9 @@ namespace helpers
 {
     class Spline
     {
-        Eigen::Spline<double, 1> mSpline;
         double mXMin;
         double mXMax;
+        Eigen::Spline<double, 1> mSpline;
 
         double scaledValue(double vX) const;
         Eigen::RowVectorXd scaledValues(Eigen::VectorXd const &vX) const;
