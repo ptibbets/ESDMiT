@@ -33,7 +33,10 @@
     <ClCompile Include="..\helpers\diff.cpp">
       <Filter>Source Files\helpers</Filter>
     </ClCompile>
-    <ClCompile Include="..\spline_test.cpp">
+    <ClCompile Include="..\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\filter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -52,6 +55,9 @@
     </ClInclude>
     <ClInclude Include="..\helpers\diff.h">
       <Filter>Source Files\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\filter.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
