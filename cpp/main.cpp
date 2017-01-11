@@ -10,7 +10,7 @@ int main(int argc, char **argv)
 
     try
     {
-        DataReader aReader(aPath, aRecord, 250);
+        DataReader aReader(aPath, aRecord, std::stoi(std::string(argv[3])));
         auto aSignals = aReader.getData();
         auto aIMFs = emd(aSignals[0]);
         writeData("out.txt", aSignals);
