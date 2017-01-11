@@ -24,13 +24,16 @@
     <ClCompile Include="..\emd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\main.cpp">
+    <ClCompile Include="..\DataWriter.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\helpers\Spline.cpp">
+      <Filter>Source Files\helpers</Filter>
     </ClCompile>
     <ClCompile Include="..\helpers\diff.cpp">
       <Filter>Source Files\helpers</Filter>
     </ClCompile>
-    <ClCompile Include="..\DataWriter.cpp">
+    <ClCompile Include="..\spline_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,14 +44,14 @@
     <ClInclude Include="..\emd.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\helpers\diff.h">
-      <Filter>Source Files\helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\helpers\Vector.h">
-      <Filter>Source Files\helpers</Filter>
-    </ClInclude>
     <ClInclude Include="..\DataWriter.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\helpers\Spline.h">
+      <Filter>Source Files\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\helpers\diff.h">
+      <Filter>Source Files\helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

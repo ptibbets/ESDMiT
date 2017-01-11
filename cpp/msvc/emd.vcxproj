@@ -91,14 +91,15 @@
     <ClCompile Include="..\DataWriter.cpp" />
     <ClCompile Include="..\emd.cpp" />
     <ClCompile Include="..\helpers\diff.cpp" />
-    <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="..\helpers\Spline.cpp" />
+    <ClCompile Include="..\spline_test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\DataReader.h" />
     <ClInclude Include="..\DataWriter.h" />
     <ClInclude Include="..\emd.h" />
     <ClInclude Include="..\helpers\diff.h" />
-    <ClInclude Include="..\helpers\Vector.h" />
+    <ClInclude Include="..\helpers\Spline.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="..\eigen\debug\msvc\eigen.natvis" />

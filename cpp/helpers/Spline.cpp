@@ -17,7 +17,7 @@ Spline::Spline(Eigen::VectorXd const &vX, Eigen::VectorXd const &vY) :
         mXMax(vX.maxCoeff()),
         mSpline(Eigen::SplineFitting<Eigen::Spline<double, 1>>::Interpolate(
                 vY.transpose(),
-                std::min<int>(vX.rows() - 1, 4),
+                std::min<int>(vX.rows() - 1, 3),
                 scaledValues(vX))) {}
 
 double Spline::operator()(double vX) const
