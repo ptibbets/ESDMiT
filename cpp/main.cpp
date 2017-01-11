@@ -1,6 +1,7 @@
 #include <iostream>
 #include "DataReader.h"
 #include "DataWriter.h"
+#include "emd.h"
 
 int main(int argc, char **argv)
 {
@@ -9,8 +10,9 @@ int main(int argc, char **argv)
 
     try
     {
-        DataReader aReader(aPath, aRecord);
+        DataReader aReader(aPath, aRecord, 250);
         auto aSignals = aReader.getData();
+        auto aIMFs = emd(aSignals[0]);
         writeData("out.txt", aSignals);
     }
     catch (std::exception &e)

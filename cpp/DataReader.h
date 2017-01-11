@@ -11,9 +11,11 @@ class DataReader
     WFDB_Siginfo mSignalInfo[2];
     std::vector<Eigen::VectorXd> mDataVectors;
 
-    Eigen::VectorXd getSignal(std::size_t vSignalNumber);
+    std::size_t mSignalCount = sizeof(mSignalInfo) / sizeof(WFDB_Siginfo);
+
+    void getSignals(int vDataLength);
 
 public:
-    DataReader(std::string vPath, std::string vRecordName);
+    DataReader(std::string vPath, std::string vRecordName, int vDataLength = -1);
     std::vector<Eigen::VectorXd> & getData();
 };
