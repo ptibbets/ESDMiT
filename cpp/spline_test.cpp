@@ -17,6 +17,6 @@ int main(void) {
         yy[i] = aSpline(xx[i]);
     }
     std::vector<Eigen::VectorXd> vec = {x, y, xx, yy };
-    writeData("../out.mat", vec);
+    writeVectors("../out.mat", vec);
     return 0;
 }
