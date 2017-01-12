@@ -64,7 +64,7 @@ function imf = emd(x)
           prevh = h;
           h = h - m;
 
-          eps = 0.0000001;
+          eps = 0.001;
           SD = sum (((prevh - h) .^ 2) ./ (prevh .^ 2 + eps));
 
        end
