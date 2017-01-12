@@ -28,7 +28,7 @@
 									<listOptionValue builtIn="false" value="/usr/local/include/eigen3/"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.optimization.flags.1713806099" name="Other optimization flags" superClass="gnu.cpp.compiler.option.optimization.flags" useByScannerDiscovery="false" value="" valueType="string"/>
-								<option id="gnu.cpp.compiler.option.preprocessor.def.1307175599" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
+								<option id="gnu.cpp.compiler.option.preprocessor.def.1307175599" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__DEBUG__"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1653990372" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
@@ -41,7 +41,7 @@
 									<listOptionValue builtIn="false" value="/usr/local/include/eigen3/"/>
 								</option>
 								<option id="gnu.c.compiler.option.optimization.flags.1506663556" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="" valueType="string"/>
-								<option id="gnu.c.compiler.option.preprocessor.def.symbols.986657091" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
+								<option id="gnu.c.compiler.option.preprocessor.def.symbols.986657091" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__DEBUG__"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1838370840" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
@@ -62,7 +62,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="splines_test.cpp|spline_test.cpp|matcreat.cpp|eigen|msvc|wfdb" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="matio|splines_test.cpp|spline_test.cpp|matcreat.cpp|eigen|msvc|wfdb" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -110,7 +110,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="splines_test.cpp|spline_test.cpp|matcreat.cpp|eigen|msvc|wfdb" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="matio|splines_test.cpp|spline_test.cpp|matcreat.cpp|eigen|msvc|wfdb" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
