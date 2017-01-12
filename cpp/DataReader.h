@@ -11,7 +11,7 @@ class DataReader
     WFDB_Siginfo mSignalInfo[2];
     std::vector<Eigen::VectorXd> mDataVectors;
 
-    std::size_t mSignalCount = sizeof(mSignalInfo) / sizeof(WFDB_Siginfo);
+    int mSignalCount = sizeof(mSignalInfo) / sizeof(WFDB_Siginfo);
 
     void getSignals(int vDataLength);
 

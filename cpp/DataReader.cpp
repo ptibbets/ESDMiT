@@ -11,7 +11,7 @@ void DataReader::getSignals(int vDataLength)
     int aSampleNumber = 0;
     while((getvec(aSamples) >= 0) && (vDataLength >= 0) ? aSampleNumber < vDataLength : true)
     {
-        for(auto aIndex = 0; aIndex < mDataVectors.size(); aIndex++)
+        for(auto aIndex = 0; aIndex < (int)mDataVectors.size(); aIndex++)
         {
             double aSample = static_cast<double>(aSamples[aIndex]);
             aSample -= mSignalInfo[aIndex].adczero;

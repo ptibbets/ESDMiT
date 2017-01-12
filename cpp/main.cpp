@@ -17,7 +17,7 @@ int main(int argc, char **argv)
         auto aResult = filter(aIMFs, 1);
         std::vector<decltype(aResult)> aResultVec;
         aResultVec.push_back(aResult);
-        writeData("out.txt", aResultVec);
+        writeData("../out.mat", aResultVec);
     }
     catch (std::exception &e)
     {
