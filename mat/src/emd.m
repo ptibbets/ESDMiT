@@ -13,13 +13,13 @@ function imf = emd(x)
                 break
            	end
 
-            if(maxs(1) ~= 1)
+            if(isempty(maxs) || maxs(1) ~= 1)
                 maxs = [1 maxs];
             end
             if(maxs(end) ~= N)
                 maxs = [maxs N];
             end
-            if(mins(1) ~= 1)
+            if(isempty(mins) || mins(1) ~= 1)
                 mins = [1 mins];
             end
             if(mins(end) ~= N)

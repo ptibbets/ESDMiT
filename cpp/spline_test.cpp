@@ -8,7 +8,7 @@ void fe() {
     x << 0, 1, 0, 2, 3, 3, 3, 4, 5, 4, 3, 2, 3, 2, 3, 2, 4, 4, 4, 3;
     Eigen::VectorXd min;
     Eigen::VectorXd max;
-    helpers::findmax(x, min, max);
+    helpers::findminmax(x, min, max);
 }
 
 int main(void) {

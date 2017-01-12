@@ -3,6 +3,6 @@
 
 namespace helpers {
 
-    void findmax(const Eigen::VectorXd& vData, Eigen::VectorXd& vMin, Eigen::VectorXd& vMax);
+    std::size_t findminmax(const Eigen::VectorXd& vData, Eigen::VectorXd& vMin, Eigen::VectorXd& vMax);
 
 }
