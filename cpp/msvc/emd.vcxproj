@@ -90,6 +90,7 @@
     <ClCompile Include="..\filter.cpp" />
     <ClCompile Include="..\helpers\diff.cpp" />
     <ClCompile Include="..\helpers\Spline.cpp" />
+    <ClCompile Include="..\main.cpp" />
     <ClCompile Include="..\matio\src\endian.c" />
     <ClCompile Include="..\matio\src\inflate.c" />
     <ClCompile Include="..\matio\src\io.c" />
@@ -101,12 +102,12 @@
     <ClCompile Include="..\matio\src\matvar_struct.c" />
     <ClCompile Include="..\matio\src\read_data.c" />
     <ClCompile Include="..\matio\src\snprintf.c" />
-    <ClCompile Include="..\spline_test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\DataReader.h" />
     <ClInclude Include="..\DataWriter.h" />
     <ClInclude Include="..\emd.h" />
+    <ClInclude Include="..\filter.h" />
     <ClInclude Include="..\helpers\diff.h" />
     <ClInclude Include="..\helpers\Spline.h" />
     <ClInclude Include="..\matio\src\mat4.h" />
