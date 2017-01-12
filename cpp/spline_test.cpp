@@ -1,8 +1,20 @@
 #include <iostream>
 #include <Spline.h>
 #include "DataWriter.h"
+#include <FindExtremum.h>
+
+void fe() {
+    Eigen::VectorXd x(20);
+    x << 0, 1, 0, 2, 3, 3, 3, 4, 5, 4, 3, 2, 3, 2, 3, 2, 4, 4, 4, 3;
+    Eigen::VectorXd min;
+    Eigen::VectorXd max;
+    helpers::findmax(x, min, max);
+}
 
 int main(void) {
+
+    fe();
+
     Eigen::VectorXd x(8);
     Eigen::VectorXd y(8);
     Eigen::VectorXd xx(1000);
