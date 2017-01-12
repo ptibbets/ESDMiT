@@ -1,4 +1,10 @@
 \section{Implementacja w~\textit{C++}}
+\indent
+
+Efekty prac umieszczone są w repozytorium \textit{GitHub}~\cite{GIT}.
+W~niniejszym rozdziale przedstawione zostały wyłącznie wybrane fragmenty
+implementacji o~kluczowym znaczeniu dla działania programu. Kompletny kod
+źródłowy znajduje się w~powyższym repozytorium.
 
 \subsection{Wstęp do prac}
 \indent
@@ -9,11 +15,12 @@ tworzenia projektu) wersja oznaczona jako 3.3.1. Dodatkowo, w~celu wykorzystania
 przykładowych rzeczywistych sygnałów pochodzących ze strony \cite{EKG-DB}
 bezpośrednio w~kodzie \textit{C++}, niezbędne było wykorzystanie biblioteki
 \textit{WFDB} w~wersji 10.5.24, która obsługuje format plików udostępnionych na
-tej stronie. Punktem wyjściowym do implementacji był prototyp algorytmu
-stworzony w~programie \textsc{Matlab}, który przedstawiony został na
-listingu~\ref{lst:emdm}. W~związku z~brakiem odpowiedników pewnych funkcji
-programu \textsc{Matlab} w~bibliotece \textit{Eigen}, niezbędne było ich
-zaimplementowanie.
+tej stronie.
+
+Punktem wyjściowym do implementacji był prototyp algorytmu stworzony w~programie
+\textsc{Matlab}, który przedstawiony został na listingu~\ref{lst:emdm}.
+W~związku z~brakiem odpowiedników pewnych funkcji programu \textsc{Matlab}
+w~bibliotece \textit{Eigen}, niezbędne było ich zaimplementowanie.
 
 \subsection{Przeniesienie kodu do języka \textit{C++}}
 \indent
@@ -48,7 +55,14 @@ z~kilku podstawowych operacji na wektorach oraz wywołań opisanych wcześniej
 funkcji co poprawiło przejrzystość kodu, umożliwiło przetestowanie
 poszczególnych jego fragmentów oraz ułatwiło rozwiązywanie błędów.
 
-Efekty powyższych prac umieszczone są w repozytorium \textit{GitHub}~\cite{GIT}.
-W~niniejszym rozdziale przedstawione zostały wyłącznie wybrane fragmenty
-implementacji o~kluczowym znaczeniu dla działania programu. Kompletny kod
-źródłowy znajduje się w~powyższym repozytorium.
+\subsection{Filtracja sygnału}
+\indent
+
+Filtracja sygnału, podobnie jak zostało to opisane
+w~rozdziale~\ref{sec:filtrMatlab} na przykładzie kodu stworzonego w~środowisku
+\textsc{Matlab}, została zrealizowana poprzez sumowanie odpowiednich składowych
+IMF.
+
+Otrzymany w~powyższy sposób sygnał odfiltrowany zapisywany był z~wykorzystaniem
+klasy \textit{DataWriter} do pliku \textit{mat}, w~celu umożliwienia porównania
+otrzymanych wyników w~środowisku \textsc{Matlab}.
