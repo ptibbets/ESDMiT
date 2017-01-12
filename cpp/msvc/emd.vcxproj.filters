@@ -89,9 +89,6 @@
     <ClInclude Include="..\helpers\diff.h">
       <Filter>Source Files\helpers</Filter>
     </ClInclude>
-    <ClInclude Include="..\filter.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\matio\src\mat4.h">
       <Filter>Source Files\matio</Filter>
     </ClInclude>
@@ -112,6 +109,9 @@
     </ClInclude>
     <ClInclude Include="..\matio\src\matio_pubconf.h">
       <Filter>Source Files\matio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\filter.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
