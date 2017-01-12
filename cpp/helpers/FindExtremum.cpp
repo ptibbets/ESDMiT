@@ -28,8 +28,8 @@ namespace helpers {
             if (d < 0)
                 minc = i;
         }
-        min.push_back(vData.size());
-        max.push_back(vData.size());
+        min.push_back(vData.size() - 1);
+        max.push_back(vData.size() - 1);
         vMin.resize(min.size());
         vMax.resize(max.size());
         for (std::size_t i = 0; i < min.size(); ++i) {

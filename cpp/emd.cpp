@@ -1,119 +1,55 @@
+#include <numeric>
 #include "emd.h"
-#include "helpers/diff.h"
+#include "helpers/FindExtremum.h"
 #include "helpers/Spline.h"
-#ifdef __DEBUG__
-#include <iostream>
-#endif
 
-void findMinMax(Eigen::VectorXd &vDiff, Eigen::VectorXd &vMins, Eigen::VectorXd &vMaxes,
-        std::size_t &vMinLength, std::size_t &vMaxLength)
+double compute_SD(Eigen::VectorXd &h, Eigen::VectorXd &prevh, double eps)
 {
-    vMinLength = vMaxLength = 0;
-    vMaxes[vMaxLength++] = 0;
-    vMins[vMinLength++] = 0;
-    for(auto aIndex = 1; aIndex < vDiff.rows() - 2; aIndex++)
-    {
-        if((vDiff[aIndex] == 0) && (vDiff[aIndex - 1] > 0) && (vDiff[aIndex + 1] < 0))
-        {
-            vMaxes[vMaxLength++] = aIndex;
-        }
-        else if((vDiff[aIndex] == 0) && (vDiff[aIndex - 1] < 0) && (vDiff[aIndex + 1] > 0))
-        {
-            vMins[vMinLength++] = aIndex;
-        }
-        else if((vDiff[aIndex] > 0) && (vDiff[aIndex + 1] < 0))
-        {
-            vMaxes[vMaxLength++] = aIndex + 1;
-        }
-        else if((vDiff[aIndex] < 0) && (vDiff[aIndex + 1] > 0))
-        {
-            vMins[vMinLength++] = aIndex + 1;
-        }
-    }
-
-    if(vMaxLength + vMinLength < 4)
-    {
-        throw std::exception();
-    }
-
-    if(vMaxes[vMaxLength] != vDiff.rows())
-    {
-        vMaxes[vMaxLength++] = vDiff.rows();
-    }
-    if(vMins[vMinLength] != vDiff.rows())
-    {
-        vMins[vMinLength++] = vDiff.rows();
-    }
-}
-
-Eigen::VectorXd getEnv(Eigen::VectorXd &vX, std::size_t &vXLength, Eigen::VectorXd &vAllVals)
-{
-    Eigen::VectorXd aYY(vAllVals.rows());
-    Eigen::VectorXd aX(vXLength);
-    Eigen::VectorXd aY(vXLength);
-    for(auto aIndex = 0; aIndex < aY.rows(); aIndex++)
-    {
-        aX[aIndex] = vX[aIndex];
-        aY[aIndex] = vAllVals[(std::size_t)aX[aIndex]];
-    }
-    helpers::Spline aSpline(aX, aY);
-    for(auto aIndex = 0; aIndex < aYY.rows(); aIndex++)
-    {
-        aYY[aIndex] = aSpline(aIndex);
-    }
-    return aYY;
-}
-
-double getNewSD(Eigen::VectorXd &vNewH, Eigen::VectorXd &vOldH)
-{
-    auto aNom = (vOldH - vNewH).cwiseProduct(vOldH - vNewH);
-    auto aDen = vOldH.cwiseProduct(vOldH) + Eigen::VectorXd::Ones(vOldH.rows()) * 0.001;
+    auto aNom = (prevh - h).cwiseProduct(prevh - h);
+    auto aDen = prevh.cwiseProduct(prevh) + Eigen::VectorXd::Ones(prevh.rows()) * eps;
     auto aSD = aNom.cwiseQuotient(aDen).sum();
     return aSD;
 }
 
-std::vector<Eigen::VectorXd> emd(Eigen::VectorXd const &vSamples)
+Eigen::VectorXd at(Eigen::VectorXd vIdxs, Eigen::VectorXd vData) {
+    Eigen::VectorXd aData(vIdxs.size());
+    for (int i = 0; i < (int)vIdxs.size(); ++i)
+        aData[i] = vData[(std::size_t)vIdxs[i]];
+    return aData;
+}
+
+std::vector<Eigen::VectorXd> emd(Eigen::VectorXd const &vData, double vThreshold, double vEps)
 {
-    std::vector<Eigen::VectorXd> aIMF;
-    auto aSamples = vSamples;
-    Eigen::VectorXd aMaxes(vSamples.rows());
-    Eigen::VectorXd aMins(vSamples.rows());
-    std::size_t aMaxLength;
-    std::size_t aMinLength;
-
-    while(true)
-    {
-        auto aH = aSamples;
-        double aSD = 1;
-
-        try
-        {
-            while(aSD > 0.3)
-            {
-                auto aDiff = helpers::diff(aH);
-                findMinMax(aDiff, aMins, aMaxes, aMinLength, aMaxLength);
-                auto aMaxEnv = getEnv(aMaxes, aMaxLength, aH);
-                auto aMinEnv = getEnv(aMins, aMinLength, aH);
-                auto aMean = (aMaxEnv + aMinEnv) / 2;
-                auto aPrevH = aH;
-                aH -= aMean;
-                aSD = getNewSD(aH, aPrevH);
-#ifdef __DEBUG__
-                std::cout << aSD << std::endl;
-#endif
+    std::vector<Eigen::VectorXd> imfs;
+    Eigen::VectorXd c = vData;
+    std::size_t n = vData.size();
+    std::size_t ext_count;
+    while (true) {
+        Eigen::VectorXd prevh;
+        Eigen::VectorXd h = c;
+        double SD = std::numeric_limits<double>::max();
+        while (SD > vThreshold) {
+            Eigen::VectorXd maxs;
+            Eigen::VectorXd mins;
+            ext_count = helpers::findminmax(h, mins, maxs);
+            if (ext_count < 2)
+                break;
+            helpers::Spline maxspl(maxs, at(maxs, h));
+            helpers::Spline minspl(mins, at(mins, h));
+            Eigen::VectorXd maxenv(vData.size());
+            Eigen::VectorXd minenv(vData.size());
+            for (int i = 0; i < (int)vData.size(); ++i) {
+                maxenv[i] = maxspl((double)i);
+                minenv[i] = minspl((double)i);
             }
+            Eigen::VectorXd m = (maxenv + minenv) / 2;
+            prevh = h;
+            h = h - m;
+            SD = compute_SD(h, prevh, vEps);
         }
-        catch(std::exception&)
-        {
-            aIMF.push_back(aH);
+        imfs.push_back(h);
+        if (ext_count < 2)
             break;
-        }
-        aIMF.push_back(aH);
-        aSamples -= aH;
     }
-#ifdef __DEBUG__
-    std::cout << aIMF.size() << std::endl;
-#endif
-
-    return aIMF;
+    return imfs;
 }

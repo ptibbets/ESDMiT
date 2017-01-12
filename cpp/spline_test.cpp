@@ -1,7 +1,8 @@
 #include <iostream>
-#include <Spline.h>
 #include "DataWriter.h"
-#include <FindExtremum.h>
+#include "emd.h"
+#include "helpers/FindExtremum.h"
+#include "helpers/Spline.h"
 
 void fe() {
     Eigen::VectorXd x(20);
@@ -12,9 +13,6 @@ void fe() {
 }
 
 int main(void) {
-
-    fe();
-
     Eigen::VectorXd x(8);
     Eigen::VectorXd y(8);
     Eigen::VectorXd xx(1000);

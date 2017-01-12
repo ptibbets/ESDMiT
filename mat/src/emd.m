@@ -9,10 +9,6 @@ function imf = emd(x)
             [~, maxs] = findpeaks(h);
             [~, mins] = findpeaks(-h);
 
-          	if size(maxs, 2) + size(mins, 2) < 2
-                break
-           	end
-
             if(isempty(maxs) || maxs(1) ~= 1)
                 maxs = [1 maxs];
             end
@@ -25,6 +21,10 @@ function imf = emd(x)
             if(mins(end) ~= N)
                 mins = [mins N];
             end
+
+          	if size(maxs, 2) + size(mins, 2) < 6
+                break
+           	end
 
             maxenv = spline(maxs, h(maxs), 1:N);
             minenv = spline(mins, h(mins), 1:N);
@@ -39,7 +39,7 @@ function imf = emd(x)
 
         imf = [imf; h];
 
-        if size(maxs, 2) + size(mins, 2) < 2
+        if size(maxs, 2) + size(mins, 2) < 6
             break
         end
 
