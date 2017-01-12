@@ -97,7 +97,7 @@ std::vector<Eigen::VectorXd> emd(Eigen::VectorXd const &vSamples)
                 aSD = getNewSD(aH, aPrevH);
             }
         }
-        catch(std::exception &e)
+        catch(std::exception&)
         {
             aIMF.push_back(aH);
             break;

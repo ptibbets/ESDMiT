@@ -1,5 +1,6 @@
 #include <iostream>
 #include <Spline.h>
+#include "DataWriter.h"
 
 int main(void) {
     Eigen::VectorXd x(8);
@@ -12,5 +13,7 @@ int main(void) {
     for (int i = 0; i < xx.size(); ++i) {
         std::cout << aSpline(xx[i]) << ", ";
     }
+    std::vector<Eigen::VectorXd> vec = {x, y, xx};
+    writeData("out.mat", vec);
     return 0;
 }
