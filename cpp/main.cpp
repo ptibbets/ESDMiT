@@ -17,7 +17,8 @@ int main(int argc, char **argv)
         auto aResult = filter(aIMFs, 1);
         std::vector<decltype(aResult)> aResultVec;
         aResultVec.push_back(aResult);
-        writeData("../out.mat", aResultVec);
+        writeMatrix("../imfs.mat", aIMFs);
+        writeMatrix("../out.mat", aResultVec);
     }
     catch (std::exception &e)
     {

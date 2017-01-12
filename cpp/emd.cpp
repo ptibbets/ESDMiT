@@ -1,6 +1,9 @@
 #include "emd.h"
 #include "helpers/diff.h"
 #include "helpers/Spline.h"
+#ifdef __DEBUG__
+#include <iostream>
+#endif
 
 void findMinMax(Eigen::VectorXd &vDiff, Eigen::VectorXd &vMins, Eigen::VectorXd &vMaxes,
         std::size_t &vMinLength, std::size_t &vMaxLength)
@@ -95,6 +98,9 @@ std::vector<Eigen::VectorXd> emd(Eigen::VectorXd const &vSamples)
                 auto aPrevH = aH;
                 aH -= aMean;
                 aSD = getNewSD(aH, aPrevH);
+#ifdef __DEBUG__
+                std::cout << aSD << std::endl;
+#endif
             }
         }
         catch(std::exception&)
@@ -105,6 +111,9 @@ std::vector<Eigen::VectorXd> emd(Eigen::VectorXd const &vSamples)
         aIMF.push_back(aH);
         aSamples -= aH;
     }
+#ifdef __DEBUG__
+    std::cout << aIMF.size() << std::endl;
+#endif
 
     return aIMF;
 }
