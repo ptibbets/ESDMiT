@@ -1,1 +1,55 @@
-\section{Implementaca w \textit{C++}}
+\section{Implementacja w~\textit{C++}}
+
+\subsection{Wstęp do prac}
+\indent
+
+W~związku z~decyzją podjętą na łamach całej grupy, do implementacji wybrana
+została biblioteka \textit{Eigen}. Wykorzystana została najnowsza (na dzień
+tworzenia projektu) wersja oznaczona jako 3.3.1. Dodatkowo, w~celu wykorzystania
+przykładowych rzeczywistych sygnałów pochodzących ze strony \cite{EKG-DB}
+bezpośrednio w~kodzie \textit{C++}, niezbędne było wykorzystanie biblioteki
+\textit{WFDB} w~wersji 10.5.24, która obsługuje format plików udostępnionych na
+tej stronie. Punktem wyjściowym do implementacji był prototyp algorytmu
+stworzony w~programie \textsc{Matlab}, który przedstawiony został na
+listingu~\ref{lst:emdm}. W~związku z~brakiem odpowiedników pewnych funkcji
+programu \textsc{Matlab} w~bibliotece \textit{Eigen}, niezbędne było ich
+zaimplementowanie.
+
+\subsection{Przeniesienie kodu do języka \textit{C++}}
+\indent
+
+Pierwszym etapem prac było skompilowanie i~przetestowanie biblioteki
+\textit{WFDB}. Następnie, po sprawdzeniu poprawności działania, stworzona
+została klasa \textit{DataReader}, która wczytuje wybrany plik pochodzący ze
+strony~\cite{EKG-DB} i~zwraca zawarte w~nim dane jako kontener biblioteki
+\textit{Eigen} --~\textit{VectorXd}.
+
+W~kolejnym kroku, dzięki posiadaniu danych w~postaci porównywalnej jak
+w~środkowisku \textsc{Matlab}, możliwe było odwzorowywanie kodu
+z~listingu~\ref{lst:emdm}. Niezbędne okazało się stworzenie funkcji, która
+realizowałaby operację ilorazu różnicowego na danych znajdujących się
+w~wektorze. Analogicznie jak w~programie \textsc{Matlab}, nazwana ona została
+\textit{diff}. Przedstawiona ona została na listingu~\ref{lst:diff}. Inną
+brakującą funkcjonalnością było poszukiwanie lokalnych maksimów i~minimów
+funkcji, której kolejne wartości zawarte byłyby w~wektorze --~funkcja
+\textit{findpeaks} w~programie \textsc{Matlab}. Odpowiedni kod wykonujący
+identyczną operację przedstawiony został na listingu~\ref{lst:peaks}.
+
+Bibilioteka \textit{Eigen} posiada realizację funkcji sklejanych, lecz w~związku
+z~jej nadmiernym rozbudowaniem w~stosunku do wymagań projektu, została ona
+wykorzystana do stworzenia klasy \textit{Spline}, która udostępnia jedynie
+wymaganą funkcjonalność --~listing~\ref{lst:spline}. Funkcje sklejane
+wykorzystywane były do interpolowania obwiedni sygnału na podstawie lokalnych
+ekstremów, co zostało wyodrębnione do oddzielnej funkcji \textit{getEnv}.
+Odchylenie standardowe $SD$ liczone było w~oddzielnej funkcji \textit{getNewSD}.
+
+Po wykonaniu powyższych operacji, główna część algorytmu EMD odpowiedzialna za
+wyszukiwanie IMF mogła zostać sprowadzona do implementacji składającej się
+z~kilku podstawowych operacji na wektorach oraz wywołań opisanych wcześniej
+funkcji co poprawiło przejrzystość kodu, umożliwiło przetestowanie
+poszczególnych jego fragmentów oraz ułatwiło rozwiązywanie błędów.
+
+Efekty powyższych prac umieszczone są w repozytorium \textit{GitHub}~\cite{GIT}.
+W~niniejszym rozdziale przedstawione zostały wyłącznie wybrane fragmenty
+implementacji o~kluczowym znaczeniu dla działania programu. Kompletny kod
+źródłowy znajduje się w~powyższym repozytorium.
