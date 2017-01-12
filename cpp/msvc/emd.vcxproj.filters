@@ -69,7 +69,7 @@
     <ClCompile Include="..\matio\src\snprintf.c">
       <Filter>Source Files\matio</Filter>
     </ClCompile>
-    <ClCompile Include="..\main.cpp">
+    <ClCompile Include="..\spline_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -88,9 +88,6 @@
     </ClInclude>
     <ClInclude Include="..\helpers\diff.h">
       <Filter>Source Files\helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\filter.h">
-      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\matio\src\mat4.h">
       <Filter>Source Files\matio</Filter>

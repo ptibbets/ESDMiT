@@ -1,19 +1,45 @@
 function imf = emd(x)
     c = x';
+    N = length(x);
     imf = [];
-    idx = 1:length(x);
     while (1)
         h = c;
         SD = inf;
         while SD > 0.3
-            [maxes, mins, stop] = findmaxmin(h);
-            
-            if stop == 1
-                break
+            d = diff(h);
+            maxes = [];
+            mins = [];
+            for i = 2:N - 2
+                if d(i) == 0 && d(i - 1) > 0 && d(i + 1) < 0
+                    maxes = [maxes, i];
+                elseif d(i) == 0 && d(i - 1) < 0 && d(i + 1) > 0
+                    mins = [mins, i];
+                elseif d(i) > 0 && d(i + 1) < 0
+                    maxes = [maxes, i + 1];
+                elseif d(i) < 0 && d(i + 1) > 0
+                    mins = [mins, i + 1];
+                end
             end
-            
-            maxenv = spline(maxes, h(maxes), idx);
-            minenv = spline(mins, h(mins), idx);
+
+          	if size(maxes, 2) + size(mins, 2) < 2
+                break
+           	end
+
+            if(maxes(1) ~= 1)
+                maxes = [1 maxes];
+            end
+            if(maxes(length(maxes)) ~= N)
+                maxes = [maxes N];
+            end
+            if(mins(1) ~= 1)
+                mins = [1 mins];
+            end
+            if(mins(length(mins)) ~= N)
+                mins = [mins N];
+            end
+
+            maxenv = spline(maxes, h(maxes), 1:N);
+            minenv = spline(mins, h(mins), 1:N);
 
             m = (maxenv + minenv) / 2;
             prevh = h;
@@ -30,40 +56,5 @@ function imf = emd(x)
         end
 
         c = c - h;
-    end
-end
-
-function [maxes, mins, stop] = findmaxmin(h)
-    stop = 0;
-    d = diff(h);
-    maxes = [];
-    mins = [];
-    for i = 2:length(h) - 2
-        if d(i) == 0 && d(i - 1) > 0 && d(i + 1) < 0
-            maxes = [maxes, i];
-        elseif d(i) == 0 && d(i - 1) < 0 && d(i + 1) > 0
-            mins = [mins, i];
-        elseif d(i) > 0 && d(i + 1) < 0
-            maxes = [maxes, i + 1];
-        elseif d(i) < 0 && d(i + 1) > 0
-            mins = [mins, i + 1];
-        end
-    end
-    
-    if length(maxes) + length(mins) < 2
-      	stop = 1;
-    end
-
-    if(isempty(maxes) || maxes(1) ~= 1)
-    	maxes = [1 maxes];
-    end
-    if(maxes(end) ~= length(h))
-     	maxes = [maxes length(h)];
-    end
-    if(isempty(mins) || mins(1) ~= 1)
-     	mins = [1 mins];
-    end
-    if(mins(end) ~= length(h))
-        mins = [mins length(h)];
-    end
+	end
 end
