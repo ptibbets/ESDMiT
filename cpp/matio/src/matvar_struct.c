@@ -76,7 +76,7 @@ Mat_VarCreateStruct(const char *name,int rank,size_t *dims,const char **fields,
             Mat_VarFree(matvar);
             matvar = NULL;
         } else {
-            for ( i = 0; i < nfields; i++ ) {
+            for ( i = 0; i < (int)nfields; i++ ) {
                 if ( NULL == fields[i] ) {
                     Mat_VarFree(matvar);
                     matvar = NULL;
@@ -91,7 +91,7 @@ Mat_VarCreateStruct(const char *name,int rank,size_t *dims,const char **fields,
             matvar->nbytes = nmemb*nfields*matvar->data_size;
             matvar->data = malloc(matvar->nbytes);
             field_vars = (matvar_t**)matvar->data;
-            for ( i = 0; i < nfields*nmemb; i++ )
+            for ( i = 0; i < (int)nfields*nmemb; i++ )
                 field_vars[i] = NULL;
         }
     }
@@ -214,7 +214,7 @@ Mat_VarGetStructFieldByIndex(matvar_t *matvar,size_t field_index,size_t index)
     if ( nmemb > 0 && index >= nmemb ) {
         Mat_Critical("Mat_VarGetStructField: structure index out of bounds");
     } else if ( nfields > 0 ) {
-        if ( field_index > nfields ) {
+        if ((int)field_index > nfields ) {
             Mat_Critical("Mat_VarGetStructField: field index out of bounds");
         } else {
             field = *((matvar_t **)matvar->data+index*nfields+field_index);
@@ -357,7 +357,7 @@ Mat_VarGetStructs(matvar_t *matvar,int *start,int *stride,int *edge,
     I = start[0];
     struct_slab->dims[0] = edge[0];
     idx[0] = start[0];
-    for ( i = 1; i < matvar->rank; i++ ) {
+    for ( i = 1; (int)i < matvar->rank; i++ ) {
         idx[i]  = start[i];
         dimp[i] = dimp[i-1]*matvar->dims[i];
         N *= edge[i];
@@ -373,7 +373,7 @@ Mat_VarGetStructs(matvar_t *matvar,int *start,int *stride,int *edge,
     }
     fields = (matvar_t**)struct_slab->data;
     for ( i = 0; i < N; i+=edge[0] ) {
-        for ( j = 0; j < edge[0]; j++ ) {
+        for ( j = 0; (int)j < edge[0]; j++ ) {
             for ( field = 0; field < nfields; field++ ) {
                 if ( copy_fields )
                     fields[(i+j)*nfields+field] =
@@ -390,7 +390,7 @@ Mat_VarGetStructs(matvar_t *matvar,int *start,int *stride,int *edge,
         I = idx[0];
         cnt[1]++;
         idx[1] += stride[1];
-        for ( j = 1; j < matvar->rank; j++ ) {
+        for ( j = 1; (int)j < matvar->rank; j++ ) {
             if ( cnt[j] == edge[j] ) {
                 cnt[j] = 0;
                 idx[j] = start[j];
@@ -494,7 +494,7 @@ Mat_VarSetStructFieldByIndex(matvar_t *matvar,size_t field_index,size_t index,
 
     nfields = matvar->internal->num_fields;
 
-    if ( index < nmemb && field_index < nfields ) {
+    if ( index < nmemb && (int)field_index < nfields ) {
         matvar_t **fields = (matvar_t**)matvar->data;
         old_field = fields[index*nfields+field_index];
         fields[index*nfields+field_index] = field;

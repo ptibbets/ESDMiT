@@ -498,12 +498,12 @@ ReadSingleData(mat_t *mat,float *data,enum matio_types data_type,int len)
             if ( mat->byteswap ) {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&d,data_size,1,(FILE*)mat->fp);
-                    data[i] = Mat_doubleSwap(&d);
+                    data[i] = (float)Mat_doubleSwap(&d);
                 }
             } else {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&d,data_size,1,(FILE*)mat->fp);
-                    data[i] = d;
+                    data[i] = (float)d;
                 }
             }
             break;
@@ -534,12 +534,12 @@ ReadSingleData(mat_t *mat,float *data,enum matio_types data_type,int len)
             if ( mat->byteswap ) {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&i32,data_size,1,(FILE*)mat->fp);
-                    data[i] = Mat_int32Swap(&i32);
+                    data[i] = (float)Mat_int32Swap(&i32);
                 }
             } else {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&i32,data_size,1,(FILE*)mat->fp);
-                    data[i] = i32;
+                    data[i] = (float)i32;
                 }
             }
             break;
@@ -552,12 +552,12 @@ ReadSingleData(mat_t *mat,float *data,enum matio_types data_type,int len)
             if ( mat->byteswap ) {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&ui32,data_size,1,(FILE*)mat->fp);
-                    data[i] = Mat_uint32Swap(&ui32);
+                    data[i] = (float)Mat_uint32Swap(&ui32);
                 }
             } else {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&ui32,data_size,1,(FILE*)mat->fp);
-                    data[i] = ui32;
+                    data[i] = (float)ui32;
                 }
             }
             break;
@@ -819,12 +819,12 @@ ReadInt64Data(mat_t *mat,mat_int64_t *data,enum matio_types data_type,int len)
             if ( mat->byteswap ) {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&d,data_size,1,(FILE*)mat->fp);
-                    data[i] = Mat_doubleSwap(&d);
+                    data[i] = (mat_int64_t)Mat_doubleSwap(&d);
                 }
             } else {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&d,data_size,1,(FILE*)mat->fp);
-                    data[i] = d;
+                    data[i] = (mat_int64_t)d;
                 }
             }
             break;
@@ -837,12 +837,12 @@ ReadInt64Data(mat_t *mat,mat_int64_t *data,enum matio_types data_type,int len)
             if ( mat->byteswap ) {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&f,data_size,1,(FILE*)mat->fp);
-                    data[i] = Mat_floatSwap(&f);
+                    data[i] = (mat_int64_t)Mat_floatSwap(&f);
                 }
             } else {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&f,data_size,1,(FILE*)mat->fp);
-                    data[i] = f;
+                    data[i] = (mat_int64_t)f;
                 }
             }
             break;
@@ -1217,12 +1217,12 @@ ReadUInt64Data(mat_t *mat,mat_uint64_t *data,enum matio_types data_type,int len)
             if ( mat->byteswap ) {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&d,data_size,1,(FILE*)mat->fp);
-                    data[i] = Mat_doubleSwap(&d);
+                    data[i] = (mat_uint64_t)Mat_doubleSwap(&d);
                 }
             } else {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&d,data_size,1,(FILE*)mat->fp);
-                    data[i] = d;
+                    data[i] = (mat_uint64_t)d;
                 }
             }
             break;
@@ -1235,12 +1235,12 @@ ReadUInt64Data(mat_t *mat,mat_uint64_t *data,enum matio_types data_type,int len)
             if ( mat->byteswap ) {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&f,data_size,1,(FILE*)mat->fp);
-                    data[i] = Mat_floatSwap(&f);
+                    data[i] = (mat_uint64_t)Mat_floatSwap(&f);
                 }
             } else {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&f,data_size,1,(FILE*)mat->fp);
-                    data[i] = f;
+                    data[i] = (mat_uint64_t)f;
                 }
             }
             break;
@@ -1614,12 +1614,12 @@ ReadInt32Data(mat_t *mat,mat_int32_t *data,enum matio_types data_type,int len)
             if ( mat->byteswap ) {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&d,data_size,1,(FILE*)mat->fp);
-                    data[i] = Mat_doubleSwap(&d);
+                    data[i] = (mat_int32_t)Mat_doubleSwap(&d);
                 }
             } else {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&d,data_size,1,(FILE*)mat->fp);
-                    data[i] = d;
+                    data[i] = (mat_int32_t)d;
                 }
             }
             break;
@@ -1632,12 +1632,12 @@ ReadInt32Data(mat_t *mat,mat_int32_t *data,enum matio_types data_type,int len)
             if ( mat->byteswap ) {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&f,data_size,1,(FILE*)mat->fp);
-                    data[i] = Mat_floatSwap(&f);
+                    data[i] = (mat_int32_t)Mat_floatSwap(&f);
                 }
             } else {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&f,data_size,1,(FILE*)mat->fp);
-                    data[i] = f;
+                    data[i] = (mat_int32_t)f;
                 }
             }
             break;
@@ -1936,12 +1936,12 @@ ReadUInt32Data(mat_t *mat,mat_uint32_t *data,enum matio_types data_type,int len)
             if ( mat->byteswap ) {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&d,data_size,1,(FILE*)mat->fp);
-                    data[i] = Mat_doubleSwap(&d);
+                    data[i] = (mat_uint32_t)Mat_doubleSwap(&d);
                 }
             } else {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&d,data_size,1,(FILE*)mat->fp);
-                    data[i] = d;
+                    data[i] = (mat_uint32_t)d;
                 }
             }
             break;
@@ -1954,12 +1954,12 @@ ReadUInt32Data(mat_t *mat,mat_uint32_t *data,enum matio_types data_type,int len)
             if ( mat->byteswap ) {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&f,data_size,1,(FILE*)mat->fp);
-                    data[i] = Mat_floatSwap(&f);
+                    data[i] = (mat_uint32_t)Mat_floatSwap(&f);
                 }
             } else {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&f,data_size,1,(FILE*)mat->fp);
-                    data[i] = f;
+                    data[i] = (mat_uint32_t)f;
                 }
             }
             break;
@@ -2258,12 +2258,12 @@ ReadInt16Data(mat_t *mat,mat_int16_t *data,enum matio_types data_type,int len)
             if ( mat->byteswap ) {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&d,data_size,1,(FILE*)mat->fp);
-                    data[i] = Mat_doubleSwap(&d);
+                    data[i] = (mat_int16_t)Mat_doubleSwap(&d);
                 }
             } else {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&d,data_size,1,(FILE*)mat->fp);
-                    data[i] = d;
+                    data[i] = (mat_int16_t)d;
                 }
             }
             break;
@@ -2276,12 +2276,12 @@ ReadInt16Data(mat_t *mat,mat_int16_t *data,enum matio_types data_type,int len)
             if ( mat->byteswap ) {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&f,data_size,1,(FILE*)mat->fp);
-                    data[i] = Mat_floatSwap(&f);
+                    data[i] = (mat_int16_t)Mat_floatSwap(&f);
                 }
             } else {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&f,data_size,1,(FILE*)mat->fp);
-                    data[i] = f;
+                    data[i] = (mat_int16_t)f;
                 }
             }
             break;
@@ -2580,12 +2580,12 @@ ReadUInt16Data(mat_t *mat,mat_uint16_t *data,enum matio_types data_type,int len)
             if ( mat->byteswap ) {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&d,data_size,1,(FILE*)mat->fp);
-                    data[i] = Mat_doubleSwap(&d);
+                    data[i] = (mat_uint16_t)Mat_doubleSwap(&d);
                 }
             } else {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&d,data_size,1,(FILE*)mat->fp);
-                    data[i] = d;
+                    data[i] = (mat_uint16_t)d;
                 }
             }
             break;
@@ -2598,12 +2598,12 @@ ReadUInt16Data(mat_t *mat,mat_uint16_t *data,enum matio_types data_type,int len)
             if ( mat->byteswap ) {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&f,data_size,1,(FILE*)mat->fp);
-                    data[i] = Mat_floatSwap(&f);
+                    data[i] = (mat_uint16_t)Mat_floatSwap(&f);
                 }
             } else {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&f,data_size,1,(FILE*)mat->fp);
-                    data[i] = f;
+                    data[i] = (mat_uint16_t)f;
                 }
             }
             break;
@@ -2902,12 +2902,12 @@ ReadInt8Data(mat_t *mat,mat_int8_t *data,enum matio_types data_type,int len)
             if ( mat->byteswap ) {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&d,data_size,1,(FILE*)mat->fp);
-                    data[i] = Mat_doubleSwap(&d);
+                    data[i] = (mat_int8_t)Mat_doubleSwap(&d);
                 }
             } else {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&d,data_size,1,(FILE*)mat->fp);
-                    data[i] = d;
+                    data[i] = (mat_int8_t)d;
                 }
             }
             break;
@@ -2920,12 +2920,12 @@ ReadInt8Data(mat_t *mat,mat_int8_t *data,enum matio_types data_type,int len)
             if ( mat->byteswap ) {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&f,data_size,1,(FILE*)mat->fp);
-                    data[i] = Mat_floatSwap(&f);
+                    data[i] = (mat_int8_t)Mat_floatSwap(&f);
                 }
             } else {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&f,data_size,1,(FILE*)mat->fp);
-                    data[i] = f;
+                    data[i] = (mat_int8_t)f;
                 }
             }
             break;
@@ -2974,12 +2974,12 @@ ReadInt8Data(mat_t *mat,mat_int8_t *data,enum matio_types data_type,int len)
             if ( mat->byteswap ) {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&i16,data_size,1,(FILE*)mat->fp);
-                    data[i] = Mat_int16Swap(&i16);
+                    data[i] = (mat_int8_t)Mat_int16Swap(&i16);
                 }
             } else {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&i16,data_size,1,(FILE*)mat->fp);
-                    data[i] = i16;
+                    data[i] = (mat_int8_t)i16;
                 }
             }
             break;
@@ -2992,12 +2992,12 @@ ReadInt8Data(mat_t *mat,mat_int8_t *data,enum matio_types data_type,int len)
             if ( mat->byteswap ) {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&ui16,data_size,1,(FILE*)mat->fp);
-                    data[i] = Mat_uint16Swap(&ui16);
+                    data[i] = (mat_int8_t)Mat_uint16Swap(&ui16);
                 }
             } else {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&ui16,data_size,1,(FILE*)mat->fp);
-                    data[i] = ui16;
+                    data[i] = (mat_int8_t)ui16;
                 }
             }
             break;
@@ -3224,12 +3224,12 @@ ReadUInt8Data(mat_t *mat,mat_uint8_t *data,enum matio_types data_type,int len)
             if ( mat->byteswap ) {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&d,data_size,1,(FILE*)mat->fp);
-                    data[i] = Mat_doubleSwap(&d);
+                    data[i] = (mat_uint8_t)Mat_doubleSwap(&d);
                 }
             } else {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&d,data_size,1,(FILE*)mat->fp);
-                    data[i] = d;
+                    data[i] = (mat_uint8_t)d;
                 }
             }
             break;
@@ -3242,12 +3242,12 @@ ReadUInt8Data(mat_t *mat,mat_uint8_t *data,enum matio_types data_type,int len)
             if ( mat->byteswap ) {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&f,data_size,1,(FILE*)mat->fp);
-                    data[i] = Mat_floatSwap(&f);
+                    data[i] = (mat_uint8_t)Mat_floatSwap(&f);
                 }
             } else {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&f,data_size,1,(FILE*)mat->fp);
-                    data[i] = f;
+                    data[i] = (mat_uint8_t)f;
                 }
             }
             break;
@@ -3296,12 +3296,12 @@ ReadUInt8Data(mat_t *mat,mat_uint8_t *data,enum matio_types data_type,int len)
             if ( mat->byteswap ) {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&i16,data_size,1,(FILE*)mat->fp);
-                    data[i] = Mat_int16Swap(&i16);
+                    data[i] = (mat_uint8_t)Mat_int16Swap(&i16);
                 }
             } else {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&i16,data_size,1,(FILE*)mat->fp);
-                    data[i] = i16;
+                    data[i] = (mat_uint8_t)i16;
                 }
             }
             break;
@@ -3314,12 +3314,12 @@ ReadUInt8Data(mat_t *mat,mat_uint8_t *data,enum matio_types data_type,int len)
             if ( mat->byteswap ) {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&ui16,data_size,1,(FILE*)mat->fp);
-                    data[i] = Mat_uint16Swap(&ui16);
+                    data[i] = (mat_uint8_t)Mat_uint16Swap(&ui16);
                 }
             } else {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&ui16,data_size,1,(FILE*)mat->fp);
-                    data[i] = ui16;
+                    data[i] = (mat_uint8_t)ui16;
                 }
             }
             break;
@@ -3601,12 +3601,12 @@ ReadCharData(mat_t *mat,char *data,enum matio_types data_type,int len)
             if ( mat->byteswap ) {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&i16,2,1,(FILE*)mat->fp);
-                    data[i] = Mat_uint16Swap(&i16);
+                    data[i] = (char)Mat_uint16Swap(&i16);
                 }
             } else {
                 for ( i = 0; i < len; i++ ) {
                     bytesread += fread(&i16,2,1,(FILE*)mat->fp);
-                    data[i] = i16;
+                    data[i] = (char)i16;
                 }
             }
             break;

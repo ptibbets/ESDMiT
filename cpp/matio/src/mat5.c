@@ -5452,9 +5452,9 @@ ReadData5(mat_t *mat,matvar_t *matvar,void *data,
         real_bytes += (8-(real_bytes % 8));
 
     if ( matvar->rank == 2 ) {
-        if ( stride[0]*(edge[0]-1)+start[0]+1 > matvar->dims[0] )
+        if ( stride[0]*(edge[0]-1)+start[0]+1 > (int)matvar->dims[0] )
             err = 1;
-        else if ( stride[1]*(edge[1]-1)+start[1]+1 > matvar->dims[1] )
+        else if ( stride[1]*(edge[1]-1)+start[1]+1 > (int)matvar->dims[1] )
             err = 1;
         else if ( matvar->compression == MAT_COMPRESSION_NONE ) {
             if ( matvar->isComplex ) {
@@ -6528,7 +6528,7 @@ WriteInfo5(mat_t *mat, matvar_t *matvar)
 
                 for ( i = 0; i < nfields; i++ ) {
                     size_t len = strlen(matvar->internal->fieldnames[i]);
-                    if ( len > maxlen )
+                    if ((int)len > maxlen )
                         maxlen = len;
                 }
                 maxlen++;

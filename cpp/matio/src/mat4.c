@@ -351,7 +351,7 @@ Read4(mat_t *mat,matvar_t *matvar)
                     return;
                 }
                 ReadDoubleData(mat, &tmp, data_type, 1);
-                matvar->dims[0] = tmp;
+                matvar->dims[0] = (size_t)tmp;
 
                 fpos = ftell((FILE*)mat->fp);
                 if ( fpos == -1L ) {
@@ -647,9 +647,9 @@ ReadData4(mat_t *mat,matvar_t *matvar,void *data,
     }
 
     if ( matvar->rank == 2 ) {
-        if ( stride[0]*(edge[0]-1)+start[0]+1 > matvar->dims[0] )
+        if ( stride[0]*(edge[0]-1)+start[0]+1 > (int)matvar->dims[0] )
             err = 1;
-        else if ( stride[1]*(edge[1]-1)+start[1]+1 > matvar->dims[1] )
+        else if ( stride[1]*(edge[1]-1)+start[1]+1 > (int)matvar->dims[1] )
             err = 1;
         if ( matvar->isComplex ) {
             mat_complex_split_t *cdata = (mat_complex_split_t*)data;
@@ -708,10 +708,10 @@ Mat_VarReadDataLinear4(mat_t *mat,matvar_t *matvar,void *data,int start,
 
     matvar->data_size = Mat_SizeOf(matvar->data_type);
 
-    for ( i = 0; i < matvar->rank; i++ )
+    for ( i = 0; (int)i < matvar->rank; i++ )
         nmemb *= matvar->dims[i];
 
-    if ( stride*(edge-1)+start+1 > nmemb ) {
+    if ( stride*(edge-1)+start+1 > (int)nmemb ) {
         return 1;
     }
     if ( matvar->isComplex ) {
@@ -780,13 +780,13 @@ Mat_VarReadNextInfo4(mat_t *mat)
         }
     }
 
-    M = floor(tmp / 1000.0);
+    M = (int)floor(tmp / 1000.0);
     tmp -= M*1000;
-    O = floor(tmp / 100.0);
+    O = (int)floor(tmp / 100.0);
     tmp -= O*100;
-    data_type = floor(tmp / 10.0);
+    data_type = (int)floor(tmp / 10.0);
     tmp -= data_type*10;
-    class_type = floor(tmp / 1.0);
+    class_type = (int)floor(tmp / 1.0);
 
     switch ( M ) {
         case 0:

@@ -51,7 +51,7 @@ Eigen::VectorXd getEnv(Eigen::VectorXd &vX, std::size_t &vXLength, Eigen::Vector
     for(auto aIndex = 0; aIndex < aY.rows(); aIndex++)
     {
         aX[aIndex] = vX[aIndex];
-        aY[aIndex] = vAllVals[aX[aIndex]];
+        aY[aIndex] = vAllVals[(std::size_t)aX[aIndex]];
     }
     helpers::Spline aSpline(aX, aY);
     for(auto aIndex = 0; aIndex < aYY.rows(); aIndex++)

@@ -54,7 +54,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_NONSTDC_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)..\helpers;$(SolutionDir)..\eigen;$(SolutionDir)..\matio\src;$(SolutionDir)..\wfdb\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -72,7 +72,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_NONSTDC_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)..\helpers;$(SolutionDir)..\eigen;$(SolutionDir)..\matio\src;$(SolutionDir)..\wfdb\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -90,6 +90,7 @@
     <ClCompile Include="..\filter.cpp" />
     <ClCompile Include="..\helpers\diff.cpp" />
     <ClCompile Include="..\helpers\Spline.cpp" />
+    <ClCompile Include="..\main.cpp" />
     <ClCompile Include="..\matio\src\endian.c" />
     <ClCompile Include="..\matio\src\inflate.c" />
     <ClCompile Include="..\matio\src\io.c" />
@@ -101,7 +102,6 @@
     <ClCompile Include="..\matio\src\matvar_struct.c" />
     <ClCompile Include="..\matio\src\read_data.c" />
     <ClCompile Include="..\matio\src\snprintf.c" />
-    <ClCompile Include="..\spline_test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\DataReader.h" />
