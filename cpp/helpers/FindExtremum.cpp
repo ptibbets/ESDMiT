@@ -8,8 +8,10 @@ namespace helpers {
     }
 
     std::size_t findminmax(const Eigen::VectorXd& vData, Eigen::VectorXd& vMin, Eigen::VectorXd& vMax) {
-        std::vector<std::size_t> min(vData.size());
-        std::vector<std::size_t> max(vData.size());
+        std::vector<std::size_t> min;
+        std::vector<std::size_t> max;
+        min.reserve(vData.size());
+        max.reserve(vData.size());
         min.push_back(0);
         max.push_back(0);
         std::size_t minc = 1;
