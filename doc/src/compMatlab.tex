@@ -1,4 +1,5 @@
 \section{Porównanie z~wersją prototypową}
+\indent
 
 W celu porównania działania implementacji w środowisku \textrm{MATLAB} a tej w
 \textit{C++}, przefiltrowany został przykładowy sygnał (MIT-BIH 100 próbki
@@ -36,8 +37,7 @@ rysunku \ref{rys:comp_spline}.
     \end{center}
     \caption{Porównanie działania filtracji implementacji \textrm{MATLAB} i
     \textit{C++} przy odrzuceniu 2 IMF-ów (Czas wykonania: \textrm{MATLAB} :
-    1523 [ms],
-    \textit{C++}: 130 [ms])}
+    1523 [ms], \textit{C++}: 130 [ms])}
     \label{rys:comp_d2}
 \end{figure}
 
@@ -49,4 +49,52 @@ rysunku \ref{rys:comp_spline}.
     \caption{Porównanie implementacji spline-ów pakietów \textit{Eigen} oraz
     \textrm{MATLAB}}
     \label{rys:comp_spline}
+\end{figure}
+
+\newpage
+
+\section{Analiza jakości filtracji}
+\indent
+
+W celu wyznaczenia jakichkolwiek wskaźników jakości, potrzebne są sygnały
+referencyjne, nie posiadające szumów, oraz ich zaszumione odpowiedniki. Na
+potrzeby analizy jakości algorytmu został wygenerowany sygnał sinusoidalny
+zaszumiony zmienną losową o jednostajnym rozkładzie, generującą liczby z zakresu
+(-0.1,0.1). Użyty do porównań wskaźnik to RMSE, który obliczony został na
+podstawie równania \eqref{equ:rmse}, gdzie $x$ to badany sygnał, a
+$\overline{x}$ to sygnał referencyjny. RMSE zaszumionego sygnału wynosi
+$0.0034$.
+
+\begin{equation}
+    RMSE = \frac{1}{N-1}\sum_{i=1}^{N}(x_i-\overline{x_i})
+    \label{equ:rmse}
+\end{equation}
+
+\begin{figure}[!htb]
+    \begin{center}
+        \includegraphics[width=13cm,trim=4cm 9cm 4cm 9cm,clip]
+        {../img/sin_rmse3.pdf}
+    \end{center}
+    \caption{Sygnał referencyjny dla usuniętych 3 IMF-ów (RMSE = $0.00048$)}
+    \label{rys:sin_rmse3}
+\end{figure}
+
+\newpage
+
+\begin{figure}[!htb]
+    \begin{center}
+        \includegraphics[width=13cm,trim=4cm 9.5cm 4cm 10cm,clip]
+        {../img/sin_rmse4.pdf}
+    \end{center}
+    \caption{Sygnał referencyjny dla usuniętych 4 IMF-ów (RMSE = $0.00045$)}
+    \label{rys:sin_rmse4}
+\end{figure}
+
+\begin{figure}[!htb]
+    \begin{center}
+        \includegraphics[width=13cm,trim=4cm 9.5cm 4cm 10cm,clip]
+        {../img/sin_rmse5.pdf}
+    \end{center}
+    \caption{Sygnał referencyjny dla usuniętych 5 IMF-ów (RMSE = $0.00021$)}
+    \label{rys:sin_rmse5}
 \end{figure}
