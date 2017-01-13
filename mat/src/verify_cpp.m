@@ -7,12 +7,15 @@ load('../dat/100.mat')
 t = tm(1:250,:);
 s = signal(1:250,1);
 
+tic
 imfs = emd(s);
+ss = emd_filter(imfs,1);
+toc
 
 figure
 
 subplot(2,1,1)
-plot(t,s,t,emd_filter(imfs,1))
+plot(t,s,t,ss)
 grid on
 legend('Original signal', '1 IMF discarded - MATLAB')
 ylabel('Amplitude')
