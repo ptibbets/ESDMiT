@@ -1,26 +1,17 @@
 #include "Spline.h"
 
-using namespace helpers;
+namespace helpers {
 
-double Spline::scaledValue(double vX) const
-{
-    return (vX - mXMin) / (mXMax - mXMin);
-}
+    Spline::Spline(Eigen::VectorXd const &vX, Eigen::VectorXd const &vY) {
+        alglib::real_1d_array ax;
+        ax.setcontent(vX.size(), vX.data());
+        alglib::real_1d_array ay;
+        ay.setcontent(vY.size(), vY.data());
+        alglib::spline1dbuildcubic(ax, ay, vX.size(), 1, 0, 1, 0, mSpline);
+    }
 
-Eigen::RowVectorXd Spline::scaledValues(Eigen::VectorXd const &vX) const
-{
-    return vX.unaryExpr([this](double vXval) {return scaledValue(vXval);}).transpose();
-}
+    double Spline::operator()(double vX) const {
+        return alglib::spline1dcalc(mSpline, vX);
+    }
 
-Spline::Spline(Eigen::VectorXd const &vX, Eigen::VectorXd const &vY) :
-        mXMin(vX.minCoeff()),
-        mXMax(vX.maxCoeff()),
-        mSpline(Eigen::SplineFitting<Eigen::Spline<double, 1>>::Interpolate(
-                vY.transpose(),
-                std::min<int>(vX.rows() - 1, 3),
-                scaledValues(vX))) {}
-
-double Spline::operator()(double vX) const
-{
-    return mSpline(scaledValue(vX))(0);
 }

@@ -1,21 +1,15 @@
 #pragma once
-
 #include <Eigen/Eigen>
-#include <unsupported/Eigen/Splines>
+#include "alglib/interpolation.h"
 
-namespace helpers
-{
-    class Spline
-    {
-        double mXMin;
-        double mXMax;
-        Eigen::Spline<double, 1> mSpline;
+namespace helpers {
 
-        double scaledValue(double vX) const;
-        Eigen::RowVectorXd scaledValues(Eigen::VectorXd const &vX) const;
+    class Spline {
+        alglib::spline1dinterpolant mSpline;
 
     public:
         Spline(Eigen::VectorXd const &vX, Eigen::VectorXd const &vY);
         double operator()(double vX) const;
     };
+
 }
