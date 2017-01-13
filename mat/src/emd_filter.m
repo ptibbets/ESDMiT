@@ -1,13 +1,10 @@
-function [ sf ] = emd_filter( s, d )
+function [ sf ] = emd_filter( imfs, d )
 
-imfs = emd(s)';
-imfss = size(imfs);
-
-sf = zeros(size(s));
+sf = zeros(1,size(imfs, 2));
 it = d;
-while(it < imfss(2))
+while(it < size(imfs, 1))
     it = it + 1;
-    sf = sf + imfs(:,it);
+    sf = sf + imfs(it,:);
 end
 
 end

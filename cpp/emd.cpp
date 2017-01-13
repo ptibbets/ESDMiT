@@ -72,6 +72,8 @@ double getNewSD(Eigen::VectorXd &vNewH, Eigen::VectorXd &vOldH)
     return aSD;
 }
 
+//#include "DataWriter.h"
+
 std::vector<Eigen::VectorXd> emd(Eigen::VectorXd const &vSamples)
 {
     std::vector<Eigen::VectorXd> aIMF;
@@ -94,6 +96,8 @@ std::vector<Eigen::VectorXd> emd(Eigen::VectorXd const &vSamples)
                 findMinMax(aDiff, aMins, aMaxes, aMinLength, aMaxLength);
                 auto aMaxEnv = getEnv(aMaxes, aMaxLength, aH);
                 auto aMinEnv = getEnv(aMins, aMinLength, aH);
+//                std::vector<Eigen::VectorXd> vec = { aMaxes, aMaxEnv, aH };
+//                writeVectors("../env.mat", vec);
                 auto aMean = (aMaxEnv + aMinEnv) / 2;
                 auto aPrevH = aH;
                 aH -= aMean;
