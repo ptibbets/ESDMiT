@@ -26,8 +26,8 @@ function imf = emd(x)
                 break
            	end
 
-            maxenv = spline(maxs, [0 h(maxs) 0], 1:N);
-            minenv = spline(mins, [0 h(mins) 0], 1:N);
+            maxenv = spline(maxs, h(maxs), 1:N);
+            minenv = spline(mins, h(mins), 1:N);
 
             m = (maxenv + minenv) / 2;
             prevh = h;

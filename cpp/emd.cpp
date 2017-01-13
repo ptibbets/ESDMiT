@@ -50,6 +50,7 @@ std::vector<Eigen::VectorXd> emd(Eigen::VectorXd const &vData, double vThreshold
         imfs.push_back(h);
         if (ext_count < 2)
             break;
+        c = c - h;
     }
     return imfs;
 }
